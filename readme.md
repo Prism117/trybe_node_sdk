@@ -32,40 +32,40 @@ const sessionsTypes = trybe.sessions.getTypes();
 ### .sessions
 
 - [getTypes](https://openapi.try.be/#operation/sessionTypeIndex)
-  - *GET* All Session Types
+  - **GET** All Session Types
   - Params: (query: {})
 - [addRecuring](https://openapi.try.be/#operation/sessionRecurrenceGroupStore)
-  - *POST* New Recurence Group
+  - **POST** New Recurence Group
 - [getAllDetails](https://openapi.try.be/#operation/sessionsIndex)
-  - *GET* Session Details
+  - **GET** Session Details
 
 ### .availability
 
 - [sessions](https://openapi.try.be/#operation/getSessionAvailability)
-  - *GET* Session Availability
+  - **GET** Session Availability
 
 ### .memberships
 
 - [addToCustomer](https://openapi.try.be/#operation/createMembershipOrder)
-  - *POST* Attach Membership to Customer
+  - **POST** Attach Membership to Customer
 - [getTypes](https://openapi.try.be/#operation/listMembershipTypes)
-  - *GET* Membership Types
+  - **GET** Membership Types
 - [getRates](https://openapi.try.be/#operation/listMembershipRates)
-  - *GET* Membership Rates
+  - **GET** Membership Rates
 - [sendBillMandate](https://openapi.try.be/#operation/requestMandate)
-  - *POST* Email Payment Request to Member
+  - **POST** Email Payment Request to Member
 
 ### .orders
 - [addItem](https://openapi.try.be/#operation/orderAddItem)
-  - *POST* Item to Order
+  - **POST** Item to Order
 - [addPayment](https://openapi.try.be/#operation/orderPaymentStore)
-  - *POST* Payment to Order
+  - **POST** Payment to Order
 
 ### .customers
 - [create](https://openapi.try.be/#operation/createCustomer)
 - [getAll](https://openapi.try.be/#operation/listCustomers)
 - [resetPassword](https://openapi.try.be/#operation/resetCustomerPassword)
-  - *POST* Email Reset Password Prompt
+  - **POST** Email Reset Password Prompt
 
 ### .payments
 - [getAll](https://openapi.try.be/#operation/listPaymentMethods)
