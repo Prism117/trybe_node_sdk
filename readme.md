@@ -1,7 +1,10 @@
 # Trybe Node SDK
 
 ## Installation
+Add Dependencies (Axios), Compile TS, Install Locally
+
 ```bash
+npm install
 npm run build
 npm install ../sdk_location
 ```
