@@ -21,9 +21,28 @@ const sessionsTypes = trybe.sessions.getTypes();
 ## Methods
 
 - [Sessions](#.sessions)
-
+- [Availability](#.availability)
+- [Memberships](#.memberships)
+- [Orders](#.orders)
+- [Customers](#.customers)
+- [Payments](#.payments)
+- [Webhooks (BETA)](#.webhooks)
 
 
 ### .sessions
 
-**[getTypes](https://openapi.try.be/#operation/sessionTypeIndex)**
+- [getTypes](https://openapi.try.be/#operation/sessionTypeIndex)
+  -- Params: (query: {})
+- [addRecuring](https://openapi.try.be/#operation/sessionRecurrenceGroupStore)
+
+### .availability
+
+### .memberships
+
+### .orders
+
+### .customers
+
+### .payments
+
+### .webhooks
