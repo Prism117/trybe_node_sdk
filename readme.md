@@ -1,10 +1,10 @@
 # Trybe SDK (Node)
 
 ## Installation
-``bash
+```bash
 npm run build
 npm install ../sdk_location
-``
+```
 
 ## Usage
 
