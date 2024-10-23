@@ -18,15 +18,15 @@ const sessionsTypes = trybe.sessions.getTypes();
 
 ```
 
-## Methods (WIP)
+## Resources (WIP)
 
-- [Sessions](#.sessions)
-- [Availability](#.availability)
-- [Memberships](#.memberships)
-- [Orders](#.orders)
-- [Customers](#.customers)
-- [Payments](#.payments)
-- [Webhooks (BETA)](#.webhooks)
+- [Sessions](#sessions)
+- [Availability](#availability)
+- [Memberships](#memberships)
+- [Orders](#orders)
+- [Customers](#customers)
+- [Payments](#payments)
+- [Webhooks (BETA)](#webhooks)
 
 
 ### .sessions
