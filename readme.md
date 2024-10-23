@@ -20,8 +20,10 @@ const sessionsTypes = trybe.sessions.getTypes();
 
 ## Methods
 
-- [Sessions](#sessions)
+- [Sessions](#.sessions)
 
 
 
-### Sessions
+### .sessions
+
+**[getTypes](https://openapi.try.be/#operation/sessionTypeIndex)**
