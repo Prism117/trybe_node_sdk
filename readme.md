@@ -1,4 +1,4 @@
-# Trybe SDK (Node)
+# Trybe Node SDK
 
 ## Installation
 ```bash
@@ -18,7 +18,7 @@ const sessionsTypes = trybe.sessions.getTypes();
 
 ```
 
-## Methods
+## Methods (WIP)
 
 - [Sessions](#.sessions)
 - [Availability](#.availability)
