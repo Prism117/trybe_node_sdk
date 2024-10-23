@@ -14,7 +14,7 @@ npm install ../sdk_location
 ```typescript
 import Trybe from "trybe_node_sdk"
 
-//Credentials & IsSandbox
+//Credentials & IsSandbox (default: false)
 const trybe = new Trybe({token: process.env.TOKEN, siteId: process.env.SITE_ID}, false);
 
 const sessionsTypes = trybe.sessions.getTypes();
