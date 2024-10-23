@@ -32,7 +32,7 @@ const sessionsTypes = trybe.sessions.getTypes();
 ### .sessions
 
 - [getTypes](https://openapi.try.be/#operation/sessionTypeIndex)
-  -- Params: (query: {})
+  - Params: (query: {})
 - [addRecuring](https://openapi.try.be/#operation/sessionRecurrenceGroupStore)
 
 ### .availability
