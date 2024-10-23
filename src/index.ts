@@ -14,17 +14,22 @@ export default class Trybe {
   //auth
   token;
   siteId;
+  isSandbox;
   //actions
   availability;
   sessions;
   webhooks;
   memberships;
   orders;
-  customer;
+  customers;
   payments;
-  constructor(credentials: { token: string; siteId: string }) {
+  constructor(
+    credentials: { token: string; siteId: string },
+    isSandbox = false
+  ) {
     this.token = credentials.token;
     this.siteId = credentials.siteId;
+    this.isSandbox = isSandbox;
 
     this.availability = new Availability(
       this.#fetch.bind(this),
@@ -37,7 +42,7 @@ export default class Trybe {
       credentials.siteId
     );
     this.orders = new Order(this.#fetch.bind(this));
-    this.customer = new Customer(this.#fetch.bind(this), credentials.siteId);
+    this.customers = new Customer(this.#fetch.bind(this), credentials.siteId);
     this.payments = new Payments(this.#fetch.bind(this));
   }
   async #fetch(
@@ -47,7 +52,11 @@ export default class Trybe {
     if (!endpoint.startsWith("/")) {
       endpoint = "/" + endpoint;
     }
-    const url = "https://api.try.be" + endpoint;
+    const baseUrl = this.isSandbox
+      ? "https://api.playground.try.be"
+      : "https://api.try.be";
+
+    const url = baseUrl + endpoint;
     const headers = { Authorization: `Bearer ${this.token}` };
     let requestOptions: {
       url: string;

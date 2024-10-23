@@ -58,6 +58,31 @@ export interface SessionQuery {
  * * CUSTOMERS
  */
 
+export interface CustomerQuery {
+  per_page?: number;
+  page?: number;
+  query?: string;
+  email?: string;
+  organisation_id?: string;
+  brand_id?: string;
+  site_id?: string;
+  membership_number?: string;
+  name?: string;
+  phone?: string;
+  membership?: "none" | "any" | "needs_dd_mandate";
+  membership_created_at_from?: string;
+  membership_created_at_to?: string;
+  membership_type_id?: string;
+  memebership_rate_id?: string;
+  marketing_opt_in?: string;
+  label_ids?: string;
+  id?: string;
+  created_at_from?: string;
+  created_at_to?: string;
+  updated_at_from?: string;
+  updated_to_from?: string;
+}
+
 export interface CustomerResponse {
   id: string;
   first_name: string;
