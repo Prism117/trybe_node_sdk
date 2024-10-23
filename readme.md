@@ -24,4 +24,4 @@ const sessionsTypes = trybe.sessions.getTypes();
 
 
 
-###Sessions
+### Sessions
