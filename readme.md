@@ -36,11 +36,19 @@ const sessionsTypes = trybe.sessions.getTypes();
 
 - [getTypes](https://openapi.try.be/#operation/sessionTypeIndex)
   - **GET** All Session Types
-  - Params: (query: {})
+  - Params:
+    - query: QueryParams
+
 - [addRecuring](https://openapi.try.be/#operation/sessionRecurrenceGroupStore)
   - **POST** New Recurence Group
+  - Params
+    - sessionId
+    - options: Post Body
+
 - [getAllDetails](https://openapi.try.be/#operation/sessionsIndex)
   - **GET** Session Details
+  - Params:
+    - query: QueryParams
 
 ### .availability
 

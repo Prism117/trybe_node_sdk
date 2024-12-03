@@ -21,7 +21,7 @@ export interface BasketItem {
   time?: string;
   duration?: number;
   quantity?: number;
-  guests: Guest[];
+  guests?: Guest[];
   item_configuration?: any;
 }
 export interface OrderItem extends BasketItem {
@@ -55,95 +55,6 @@ export interface SessionQuery {
 }
 
 /**
- * * CUSTOMERS
- */
-
-export interface CustomerQuery {
-  per_page?: number;
-  page?: number;
-  query?: string;
-  email?: string;
-  organisation_id?: string;
-  brand_id?: string;
-  site_id?: string;
-  membership_number?: string;
-  name?: string;
-  phone?: string;
-  membership?: "none" | "any" | "needs_dd_mandate";
-  membership_created_at_from?: string;
-  membership_created_at_to?: string;
-  membership_type_id?: string;
-  memebership_rate_id?: string;
-  marketing_opt_in?: string;
-  label_ids?: string;
-  id?: string;
-  created_at_from?: string;
-  created_at_to?: string;
-  updated_at_from?: string;
-  updated_to_from?: string;
-}
-
-export interface CustomerResponse {
-  id: string;
-  first_name: string;
-  last_name: string;
-  full_name: string;
-  phone: string;
-  has_password: boolean;
-  dob: string;
-  brand_id: string;
-  site_id: string;
-  stripe_id: string;
-  express_stripe_id: string;
-  email: string;
-  labels: Label[];
-  preferred_locale: string;
-  locked_at: string;
-  created_at: string;
-  updated_at: string;
-  deleted_at: string;
-  last_active_at: string;
-  email_verified_at: string;
-  last_check_in: LastCheckIn;
-  avatar_id: string;
-  avatar: Avatar;
-  external_ref: string;
-}
-
-interface Label {
-  id: string;
-  value: string;
-  colour: string;
-}
-
-interface LastCheckIn {
-  checked_in_at: string;
-  method: string;
-}
-
-interface Avatar {
-  id: string;
-  file_name: string;
-  mime_type: string;
-  size: number;
-  url: string;
-}
-
-export interface CreateCustomerBody {
-  site_id: string;
-  first_name?: string;
-  last_name?: string;
-  phone?: string;
-  dob?: string;
-  email: string;
-  password?: string;
-  marketing_preference_ids?: string[];
-  external_ref?: string;
-  guestline_ref?: string;
-  preferred_locale?: string;
-}
-
-/**
  * *MEMBERSHIPS
  */
 export interface MembershipTypeResponse {
@@ -171,11 +82,11 @@ export interface MembershipType {
 }
 
 export interface MembershipRateResponse {
-  data: MemebershipRateData[];
+  data: MembershipRateData[];
   meta: Meta;
 }
 
-export interface MemebershipRateData {
+export interface MembershipRateData {
   id: string;
   membership_type_id: string;
   name: string;
@@ -243,4 +154,57 @@ export interface MembershipQuery {
   terms?: boolean;
   per_page?: number;
   page?: number;
+}
+
+export interface CreateMemberResponse {
+  id: string;
+  site_id: string;
+  membership_number: string;
+  customer: Customer;
+  members: Member[];
+  type: MembershipType;
+  rate: Rate;
+  status: string;
+  source: string;
+  payment_method: PaymentMethod;
+  start_date: string;
+  end_date: string;
+  created_at: string;
+  basket_id: string;
+  external_ref: string;
+  next_billing_date: string;
+  attention_reason: string;
+}
+
+export interface Member {
+  customer_id: string;
+  membership_number: string;
+  is_lead: boolean;
+}
+
+export interface PaymentMethod {
+  id: string;
+  type: string;
+  last_4: string;
+  status: string;
+  card_brand: string;
+}
+
+//* Avilability
+type IsoOffsetStr = string;
+
+export interface AllOfferingsResponse {
+  data: [
+    {
+      date: string;
+      has_availability: boolean;
+      can_enquire: boolean;
+      bookable_from: IsoOffsetStr;
+      bookable_to: IsoOffsetStr;
+    }
+  ];
+  meta: {
+    max_advance_bookings_interval: string;
+    min_advance_bookings_interval: string;
+  };
 }
