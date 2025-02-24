@@ -47,10 +47,12 @@ interface PayoutReturn {
   id: string;
   status: string;
   payout_date: string;
-  processed_date: string;
+  processed_at: string;
   num_charges: number;
+  gross_fee_total: number;
   amount: number;
   currency: string;
+  site_id: string;
 }
 
 interface MultiDetails extends PayoutReturn {

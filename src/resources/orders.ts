@@ -52,10 +52,14 @@ export default class Orders {
     });
   }
 
-  getAll(query: OrderQuery) {
+  find(query: OrderQuery) {
     return this.#trybe.fetch<Order[]>("/shop/orders", {
       params: { ...query, site_id: this.#trybe.siteId },
     });
+  }
+
+  findOne(orderId: string) {
+    return this.#trybe.fetch<Order>(`/shop/orders/${orderId}`);
   }
 
   addItem(orderId: string, item: OrderItem, skipAvailabilityChecks = false) {
