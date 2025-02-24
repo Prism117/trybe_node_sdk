@@ -1,12 +1,17 @@
 //Types
 import type Trybe from "../index.js";
-import type { RecurringOptions } from "../types.js";
+import type {
+  RecurringOptionReturn,
+  RecurringOptions,
+  SessionType,
+} from "../types/sessions.js";
 
 //Todo: Move to Types File
 interface AllSessionQuery {
   page?: number;
   per_page?: number;
   start_time_from?: string;
+  start_time_to?: string;
   session_type_id?: string;
   recurrence_group_id?: string;
   include_booking?: boolean;
@@ -45,10 +50,27 @@ export default class Sessions {
     });
   }
 
+  updateRecurring(
+    sessionId: string,
+    groupId: string,
+    update?: Partial<RecurringOptions>
+  ) {
+    return this.#trybe.fetch<RecurringOptionReturn>(
+      `/shop/session-types/${sessionId}/recurrence-groups/${groupId}`,
+      { method: "PUT", body: update }
+    );
+  }
+
   getAllDetails(query?: AllSessionQuery) {
     return this.#trybe.fetch("/shop/sessions", { params: query });
   }
 
+  /**
+   * @param {Object} query
+   * @param query.session_type_id - Comma Separated List
+   *
+   * {@link https://openapi.try.be/#operation/sessionTypeIndex|View Docs}
+   */
   getTypes(query?: {
     page?: number;
     per_page?: number;
@@ -66,6 +88,12 @@ export default class Sessions {
     });
   }
 
+  /**
+   *
+   * @param sessionId
+   * @param updates
+   * @returns
+   */
   updateType(sessionId: string, updates: any) {
     return this.#trybe.fetch(`/shop/session-types/${sessionId}`, {
       method: "PUT",
@@ -76,120 +104,4 @@ export default class Sessions {
   /**
    * Updates start date for all sessions of a given session type.
    */
-}
-
-interface Reference {
-  name: string;
-  id: string;
-}
-
-export interface SessionType {
-  id: string;
-  name: string;
-  description: string;
-  product_code: string;
-  currency: string;
-  image_id: string;
-  image: Image;
-  offered_online: boolean;
-  private: boolean;
-  site_id: string;
-  duration: number;
-  max_baskets_per_session: number;
-  max_advance_bookings_interval: string;
-  min_advance_bookings_interval: string;
-  members_only: boolean;
-  max_bookings_per_member: number;
-  permitted_membership_type_ids: string[];
-  membership_booking_windows_enabled: boolean;
-  membership_booking_windows: MembershipBookingWindow[];
-  customer_cancellation_permitted: string;
-  customer_cancellation_min_duration: string;
-  waitlist_enabled: boolean;
-  min_guests: number;
-  max_guests: number;
-  price_rules: PriceRule[];
-  category_ids: string[];
-  categories: Category[];
-  recurrence_groups: RecurrenceGroup[];
-  meta: Meta;
-  upsell_offerings: UpsellOffering[];
-  cross_sell_offerings: CrossSellOffering[];
-  related_retail_offerings: RelatedRetailOffering[];
-  revenue_centre: string;
-  updated_at: string;
-  deleted_at: string;
-}
-
-export interface Image {
-  id: string;
-  file_name: string;
-  mime_type: string;
-  size: number;
-  url: string;
-}
-
-export interface MembershipBookingWindow {
-  membership_type_id: string;
-  max_advance_bookings_interval: string;
-  min_advance_bookings_interval: string;
-}
-
-export interface PriceRule {
-  id: string;
-  session_type_id: string;
-  date_from: string;
-  date_to: string;
-  weekday: string;
-  weekdays: string[];
-  start_time: string;
-  end_time: string;
-  price: number;
-}
-
-export interface Category {
-  id: string;
-  name: string;
-  organisation_id: string;
-}
-
-export interface RecurrenceGroup {
-  id: string;
-  name: string;
-  practitioner: Reference;
-  room: Reference;
-  weekdays: string[];
-  start_time: string;
-  capacity: number;
-  recurrence_start: string;
-  recurrence_end: string;
-}
-
-export interface Meta {
-  title: string;
-  description: string;
-}
-
-export interface UpsellOffering {
-  offering_type: string;
-  offering_id: string;
-  offering_name: string;
-  offering_config: any;
-  display_name: string;
-}
-
-export interface CrossSellOffering {
-  offering_type: string;
-  offering_id: string;
-  offering_name: string;
-  offering_config: any;
-  display_name: string;
-}
-
-export interface RelatedRetailOffering {
-  offering_type: string;
-  offering_id: string;
-  offering_name: string;
-  offering_config: any;
-  display_name: string;
 }

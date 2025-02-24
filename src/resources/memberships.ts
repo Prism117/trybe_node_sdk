@@ -1,12 +1,14 @@
 import type Trybe from "../index.js";
+
 import {
-  CreateMemberResponse,
-  type CreateCustomerBody,
-  type CreateMembershipBody,
-  type MembershipQuery,
-  type MembershipRateResponse,
-  type MembershipType,
-} from "../types.js";
+  Membership,
+  MembershipRate,
+  MembershipType,
+  MembershipQuery,
+  CreateMembershipBody,
+} from "../types/memberships.js";
+
+import { CreateCustomerBody } from "../types/customers.js";
 
 type MembershipStatus =
   | "active"
@@ -20,6 +22,7 @@ interface MemberQuery {
   page?: number;
   per_page?: number;
   rate_id?: string;
+  customer_id?: string;
   membership_type_ids?: string;
   billing_frequency?: "P1M" | "P3M" | "P6M" | "P1Y";
   created_at_from?: string;
@@ -40,7 +43,7 @@ export default class Memberships {
     if (query?.status && Array.isArray(query.status)) {
       query.status = query.status.join(",");
     }
-    return this.#trybe.fetch("/customers/memberships", {
+    return this.#trybe.fetch<Membership[]>("/customers/memberships", {
       params: query,
     });
   }
@@ -65,7 +68,7 @@ export default class Memberships {
   }
 
   addToCustomer(body: CreateMembershipBody) {
-    return this.#trybe.fetch<CreateMemberResponse>("/shop/memberships", {
+    return this.#trybe.fetch<Membership>("/shop/memberships", {
       body: { ...body, site_id: this.#trybe.siteId },
       method: "POST",
     });
@@ -74,7 +77,6 @@ export default class Memberships {
   /**
    * Creates new membership & customer (if applicable)
    */
-
   create(customerData: CreateCustomerBody, membership: CreateCustomerBody) {
     return this.#trybe.fetch("/customers/memberships", {
       method: "POST",
@@ -94,12 +96,9 @@ export default class Memberships {
     membership_type_id?: string;
     archive?: boolean;
   }) {
-    return this.#trybe.fetch<MembershipRateResponse["data"]>(
-      "/customers/membership-rates",
-      {
-        params: query,
-      }
-    );
+    return this.#trybe.fetch<MembershipRate[]>("/customers/membership-rates", {
+      params: query,
+    });
   }
 
   sendBillMandate(membershipId: string) {

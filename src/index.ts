@@ -8,11 +8,13 @@ import Memberships from "./resources/memberships.js";
 import Order from "./resources/orders.js";
 import Packages from "./resources/packages.js";
 import Payments from "./resources/payments.js";
+import Payouts from "./resources/payouts.js";
 import Practitioners from "./resources/practitioners.js";
 import Products from "./resources/products.js";
 import Sessions from "./resources/sessions.js";
 import Webhooks from "./resources/webhooks.js";
 
+export * from "./types/index.js";
 import type { Method } from "./types.js";
 import { TrybeError } from "./error.js";
 
@@ -50,21 +52,6 @@ export default class Trybe {
     this.webhooks = new Webhooks(this);
   }
 
-  get calendar() {
-    return new Calendar(this);
-  }
-  get customers() {
-    return new Customers(this);
-  }
-
-  get practioners() {
-    return new Practitioners(this);
-  }
-
-  get products() {
-    return new Products(this);
-  }
-
   /**
    * Trybe-Fitted Request Method
    * @param options.params - Query String Params
@@ -96,8 +83,8 @@ export default class Trybe {
     const headers = { Authorization: `Bearer ${this.token}` };
     const requestOptions: AxiosRequestConfig = {
       url,
-      method: options?.method ?? "GET",
       headers,
+      method: options?.method ?? "GET",
     };
 
     if (options?.params) {
@@ -155,4 +142,26 @@ export default class Trybe {
       throw error;
     }
   }
+
+  get calendar() {
+    return new Calendar(this);
+  }
+
+  get customers() {
+    return new Customers(this);
+  }
+
+  get payouts() {
+    return new Payouts(this);
+  }
+
+  get practioners() {
+    return new Practitioners(this);
+  }
+
+  get products() {
+    return new Products(this);
+  }
 }
+
+export * from "./types/index.js";

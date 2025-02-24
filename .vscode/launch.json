@@ -10,6 +10,7 @@
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
       "envFile": "${workspaceFolder}/.env",
+      "sourceMaps": true,
       "program": "${workspaceFolder}\\dist\\local\\index.js"
     }
   ]

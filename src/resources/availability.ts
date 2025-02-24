@@ -1,6 +1,6 @@
 //Types
 import type Trybe from "../index.js";
-import type { SessionQuery } from "../types.js";
+import type { SessionQuery } from "../types/sessions.js";
 
 export default class Availability {
   #trybe;
@@ -12,14 +12,12 @@ export default class Availability {
    * Get Session Availability
    */
 
-  sessions(sessionId: string, query: SessionQuery) {
+  sessions(sessionTypeId: string, query: SessionQuery) {
     return this.#trybe.fetch(
-      `/shop/item-availability/sessions/${this.#trybe.siteId}/${sessionId}`,
+      `/shop/item-availability/sessions/${this.#trybe.siteId}/${sessionTypeId}`,
       { params: query }
     );
   }
-
-  
 
   allOfferings(query: { date?: string; category?: string } = {}) {
     return this.#trybe.fetch("/shop/shop/offerings", {
@@ -27,20 +25,4 @@ export default class Availability {
       returnMeta: true,
     });
   }
-
-  //TODO: WIP
-  //
-  makeUnavailable(blocked: BlockedItems[], dates: BlockOutParams) {}
 }
-
-type BlockedItems = "sessions" | "packages" | "appointments";
-// Todo: Move to Types File
-type BlockOutDates =
-  | {
-      date: string;
-      dateStart?: never;
-      dateEnd?: never;
-    }
-  | { dateStart: string; dateEnd: string; date?: never };
-
-type BlockOutParams = BlockOutDates & {};

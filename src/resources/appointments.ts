@@ -1,4 +1,5 @@
 import Trybe from "../index.js";
+import { AppointmentType } from "../types/appointments.js";
 
 export default class Appointments {
   #trybe;
@@ -6,8 +7,10 @@ export default class Appointments {
     this.#trybe = trybe;
   }
 
-  getTypes() {
-    return this.#trybe.fetch("/shop/appointment-types");
+  getTypes(query?: { page?: number; per_page?: number; archived?: boolean }) {
+    return this.#trybe.fetch<AppointmentType[]>("/shop/appointment-types", {
+      params: query,
+    });
   }
 
   getTags(orgId: string) {

@@ -113,6 +113,7 @@ export interface Guest {
   intake_form_submission_id: string;
   intake_form_complete: boolean;
   intake_form_submitted_at: string;
+  customer_id?: string;
 }
 
 export interface Visit {
@@ -150,7 +151,7 @@ export interface BookingItem {
   price: number;
   base_price: number;
   discount_amount: number;
-  discounts: Discount[];
+  discounts: Discount4[];
   date: string;
   start_time: string;
   added_by_customer: boolean;
@@ -198,6 +199,7 @@ export interface Discount {
   percentage: number;
   reason_code: string;
   coupon: Coupon;
+  discount_type_code: string;
   applicable_for: string;
 }
 
@@ -228,7 +230,7 @@ export interface Discount4 {
   discount_type_code: string;
   applicable_for: string;
   discount_amount: number;
-  applied_by: AppliedBy;
+  applied_by: AppliedBy2;
   applied_at: string;
   site_id: string;
 }
@@ -276,15 +278,25 @@ export interface SubPackageItem {
   offering_name: string;
   time: string;
   duration: number;
-  guests: Guest[];
-  item_configuration: any;
   reserved_until: string;
+  price_change: number;
+  guests: Guest[];
+  practitioners?: Reference[];
+  item_configuration: any;
   booking_summary: BookingSummary;
 }
 
 export interface AppliedBy {
   id: string;
   name: string;
+  email: string;
+}
+
+export interface AppliedBy2 {
+  id: string;
+  first_name: string;
+  last_name: string;
+  full_name: string;
   email: string;
 }
 
@@ -310,7 +322,7 @@ export interface PurchaseItem {
   guest: Guest;
   guests: Guest[];
   discount_amount: number;
-  discounts: Discount[];
+  discounts: Discount4[];
   added_by_customer: boolean;
   sold_by: Reference & { type: string };
   created_at: string;

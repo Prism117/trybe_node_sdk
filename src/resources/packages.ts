@@ -1,4 +1,5 @@
 import Trybe from "../index.js";
+import { GetPackageRes } from "../types/packages.js";
 
 export default class Packages {
   #trybe;
@@ -6,12 +7,9 @@ export default class Packages {
     this.#trybe = trybe;
   }
 
-  async getAll() {
-    try {
-      const response = await this.#trybe.fetch("/shop/packages");
-      return response;
-    } catch (error) {
-      console.error(error);
-    }
+  getAll(query?: { page?: number; per_page?: number; archived?: boolean }) {
+    return this.#trybe.fetch<GetPackageRes[]>("/shop/packages", {
+      params: query,
+    });
   }
 }

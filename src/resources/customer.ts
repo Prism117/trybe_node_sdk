@@ -104,11 +104,12 @@ export default class Customer {
 }
 
 interface CouponBody {
-  coupon: {
+  coupon?: {
     value: string;
     name: string;
     description: string;
   };
   coupon_id: string;
   expiry_date?: string;
+  membership_id?: string;
 }
